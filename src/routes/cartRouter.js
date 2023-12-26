@@ -1,4 +1,4 @@
-/* // src/routes/cartRouter.js
+
 const express = require('express');
 const router = express.Router();
 const CartManager = require('../dao/models/CartManager');
@@ -37,20 +37,6 @@ module.exports = () => {
       res.status(400).send(error.message);
     }
   });
-
-  return router;
-};
- */
-
-// src/routes/cartRouter.js
-const express = require('express');
-const router = express.Router();
-const CartManager = require('../dao/models/CartManager');
-
-module.exports = () => {
-  const cartManager = new CartManager();
-
-  // Resto de las rutas de cartRouter
 
   router.delete('/:cid/products/:pid', async (req, res) => {
     const cartId = req.params.cid;

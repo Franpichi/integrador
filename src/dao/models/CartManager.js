@@ -1,4 +1,3 @@
-// dao/models/CartManager.js
 const Cart = require('../schemas/cartSchema');
 
 class CartManager {

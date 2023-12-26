@@ -1,4 +1,3 @@
-// dao/schemas/cartSchema.js
 const mongoose = require('../mongoose');
 
 const cartSchema = new mongoose.Schema({

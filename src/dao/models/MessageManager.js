@@ -1,4 +1,3 @@
-// dao/models/MessageManager.js
 const Message = require('../schemas/messageSchema');
 
 class MessageManager {
