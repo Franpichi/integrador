@@ -1,4 +1,4 @@
-// src/routes/cartRouter.js
+/* // src/routes/cartRouter.js
 const express = require('express');
 const router = express.Router();
 const CartManager = require('../dao/models/CartManager');
@@ -33,6 +33,64 @@ module.exports = () => {
     try {
       await cartManager.addProductToCart(cartId, productId, quantity);
       res.send('Product added to cart successfully');
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  });
+
+  return router;
+};
+ */
+
+// src/routes/cartRouter.js
+const express = require('express');
+const router = express.Router();
+const CartManager = require('../dao/models/CartManager');
+
+module.exports = () => {
+  const cartManager = new CartManager();
+
+  // Resto de las rutas de cartRouter
+
+  router.delete('/:cid/products/:pid', async (req, res) => {
+    const cartId = req.params.cid;
+    const productId = req.params.pid;
+    try {
+      await cartManager.removeProductFromCart(cartId, productId);
+      res.send('Product removed from cart successfully');
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  });
+
+  router.put('/:cid', async (req, res) => {
+    const cartId = req.params.cid;
+    const products = req.body.products;
+    try {
+      await cartManager.updateCart(cartId, products);
+      res.send('Cart updated successfully');
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  });
+
+  router.put('/:cid/products/:pid', async (req, res) => {
+    const cartId = req.params.cid;
+    const productId = req.params.pid;
+    const quantity = req.body.quantity;
+    try {
+      await cartManager.updateProductQuantity(cartId, productId, quantity);
+      res.send('Product quantity updated successfully');
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  });
+
+  router.delete('/:cid', async (req, res) => {
+    const cartId = req.params.cid;
+    try {
+      await cartManager.removeAllProductsFromCart(cartId);
+      res.send('All products removed from cart successfully');
     } catch (error) {
       res.status(400).send(error.message);
     }
